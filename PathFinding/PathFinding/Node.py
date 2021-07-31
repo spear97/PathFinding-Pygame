@@ -1,4 +1,5 @@
 import Color as color
+import pygame
 
 class Node:
     def __init__(self, row, col, width, total_rows):

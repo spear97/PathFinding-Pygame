@@ -1,6 +1,6 @@
 from Node import Node
 
-#User Manhattan Method to find out how far Point a is from Point b
+#Uses Manhattan Method to find out how far Point a is from Point b
 def h_AStar(a, b):
     x1, y1 = a
     x2, y2 = b
