@@ -83,15 +83,18 @@ def main(win, width):
     #Will handle if a given simulation has started or not
     started = False
 
+    #Lets Program run
+    run = True
+
     #The Loop that will help run the Simulation
-    while 1:
+    while run:
         for event in pygame.event.get():
 
             draw(WIN, grid, ROWS, width) 
 
             #If Giant "X" Button in Top-Right Corner has already been pressed
             if event.type == pygame.QUIT:
-                break
+                run = False
 
             #Don't allow any Inputs if a Simulation has already Started
             if started:
@@ -119,8 +122,14 @@ def main(win, width):
 
             #If the Right Mouse button has been pressed
             elif pygame.mouse.get_pressed()[2]:
-                pass
+                pos = pygame.mouse.get_pos()
+                row, col = get_ClickedPos(pos, ROWS, width)
+                node = grid[row][col]
 
+                if node == start:
+                    start = None
+                elif node == end:
+                    end = None
 
     pygame.quit()
 
