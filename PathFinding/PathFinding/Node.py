@@ -61,7 +61,7 @@ class Node:
         return self.color == self.open_color
 
     #Check if the Node is blocked or not
-    def blocked(self):
+    def barrier(self):
         return self.color == self.block_color
 
     #Check if the Node is the start Node or not
@@ -106,7 +106,19 @@ class Node:
 
     #Update all Neighbor nodes surrounding it
     def update_neighbors(self, grid):
-        return
+        self.neighbors = []
+        #Attempt to Get Node Below Current Node
+        if self.row < self.total_rows - 1 and not grid[self.row-1][self.col].barrier():
+            self.neightbors.append(grid[self.row+1][self.col])
+        #Attempt to Get Node Above Current Node
+        if self.row < self.total_rows - 1 and not grid[self.row-1][self.col].barrier():
+            self.neightbors.append(grid[self.row+1][self.col])
+        #Attempt to Get Node Left of Current Node
+        if self.row < self.total_rows - 1 and not grid[self.row-1][self.col].barrier():
+            self.neightbors.append(grid[self.row+1][self.col])
+        #Attempt to Get Node Right of Current Node
+        if self.row < self.total_rows - 1 and not grid[self.row-1][self.col].barrier():
+            self.neightbors.append(grid[self.row+1][self.col])
 
     def __lt__(self, other):
         return False
