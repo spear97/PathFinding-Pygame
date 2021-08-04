@@ -1,7 +1,6 @@
 import pygame, math
 import Color as color
 from Node import Node
-from queue import PriorityQueue
 
 #Set up Window for Simulation
 WIDTH = 800
@@ -130,6 +129,12 @@ def main(win, width):
                     start = None
                 elif node == end:
                     end = None
+
+            if event.type == pygame.KEYDOWN:
+                if event.key == pygame.K_1 and not started: 
+                    for row in grid:
+                        for node in row:
+                            node.update_neighbors()
 
     pygame.quit()
 

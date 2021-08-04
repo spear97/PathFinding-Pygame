@@ -107,18 +107,22 @@ class Node:
     #Update all Neighbor nodes surrounding it
     def update_neighbors(self, grid):
         self.neighbors = []
-        #Attempt to Get Node Below Current Node
-        if self.row < self.total_rows - 1 and not grid[self.row-1][self.col].barrier():
-            self.neightbors.append(grid[self.row+1][self.col])
-        #Attempt to Get Node Above Current Node
-        if self.row < self.total_rows - 1 and not grid[self.row-1][self.col].barrier():
-            self.neightbors.append(grid[self.row+1][self.col])
-        #Attempt to Get Node Left of Current Node
-        if self.row < self.total_rows - 1 and not grid[self.row-1][self.col].barrier():
-            self.neightbors.append(grid[self.row+1][self.col])
-        #Attempt to Get Node Right of Current Node
-        if self.row < self.total_rows - 1 and not grid[self.row-1][self.col].barrier():
-            self.neightbors.append(grid[self.row+1][self.col])
+
+        #Down
+        if self.row < self.total_rows - 1 and not grid[self.row + 1][self.col].barrier():
+            self.neightbors.append(grid[self.row + 1][self.col])
+
+        #Up
+        if self.row > 0 and not grid[self.row - 1][self.col].barrier():
+            self.neightbors.append(grid[self.row - 1][self.col])
+
+        #Left
+        if self.col > 0 and not grid[self.row][self.col - 1].barrier():
+            self.neightbors.append(grid[self.row][self.col - 1])
+
+        #Right
+        if self.col < self.total_rows - 1 and not grid[self.row][self.col + 1].barrier():
+            self.neightbors.append(grid[self.row + 1][self.col + 1])
 
     def __lt__(self, other):
         return False
