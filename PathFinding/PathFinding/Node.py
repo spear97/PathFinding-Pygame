@@ -1,4 +1,5 @@
 import pygame
+import Color as c
 
 class Node:
     def __init__(self, row, col, width, total_rows):
@@ -6,7 +7,7 @@ class Node:
         self.col = col
         self.x = row * width
         self.y = col * width
-        #self.color = WHITE
+        self.color = c.WHITE
         self.neighbors = []
         self.width = width
         self.total_width = total_width
@@ -15,40 +16,40 @@ class Node:
         return self.row, self.col
 
     def is_closed(self):
-        pass
+        return self.color == c.RED
 
     def is_open(self):
-        pass
+        return self.color == c.GREEN
 
     def is_barrier(self):
-        pass
+        return self.color == c.BLACK
 
     def is_start(self):
-        pass
+        return self.color == c.ORANGE
 
     def is_end(self):
-        pass
+        return self.color == c.TURQUOISE
 
     def reset(self):
-        pass
+        self.color = c.WHITE
 
     def make_start(self):
-        pass
+        self.color = c.ORANGE
 
     def make_closed(self):
-        pass
+       self.color = c.RED
 
     def make_open(self):
-        pass
+        self.color = c.GREEN
 
     def make_barrier(self):
-        pass
+        self.color = c.BLACK
 
     def make_end(self):
-        pass
+        self.color = c.TURQUOISE
 
     def make_path(self):
-        pass
+        self.color = c.PURPLE
 
     def draw(self, win):
         pygame.draw.rect(win, self.color, (self.x, self.y, self.width, self.width))
