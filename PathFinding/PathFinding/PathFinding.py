@@ -1,5 +1,6 @@
 import pygame
 from AStar import *
+from Node import Node
 
 #Windows Parameters
 WIDTH = 800
