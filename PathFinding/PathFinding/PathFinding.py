@@ -2,6 +2,7 @@ import pygame
 import math
 from Node import *
 from AStar import *
+from BestFirstSearch import *
 from queue import PriorityQueue
 
 WIDTH = 800
@@ -92,10 +93,17 @@ def main(win, width):
 			if event.type == pygame.KEYDOWN:
 				if event.key == pygame.K_1 and start and end:
 					for row in grid:
-						for spot in row:
-							spot.update_neighbors(grid)
+						for node in row:
+							node.update_neighbors(grid)
 
 					AStar(lambda: draw(win, grid, ROWS, width), grid, start, end)
+
+				if event.key == pygame.K_2 and start and end:
+					for row in grid:
+						for node in row:
+							node.update_neighbors(grid)
+
+					BestFirstSearch(lambda: draw(win, grid, ROWS, width), grid, start, end)
 
 				if event.key == pygame.K_c:
 					start = None

@@ -42,4 +42,36 @@ def BestFirstSearch(draw, grid, start, end):
 			if event.type == pygame.QUIT:
 				pygame.quit()
 
-		break
+		#Try to get the greatest value in the queue
+		current = open_set.get()[2]
+		open_set_hash.remove(current)
+
+		#If Current happens to be end Node, reconstruct the path
+		if current == end:
+			reconstruct_path(came_from, end, draw)
+			end.make_end()
+			return True
+
+		#Find the Closest Neighbor Node to the End Node
+		for neighbor in current.neighbors:
+			temp_g_score = g_score[current] + 1
+
+			#If temp_g_score is cheaper than current g_score, then
+			#update the g_score and f_score
+			if temp_g_score < g_score[neighbor]:
+				came_from[neighbor] = current
+				g_score[neighbor] = temp_g_score
+				f_score[neighbor] = h_BestFirst(neighbor.get_pos(), end.get_pos())
+				if neighbor not in open_set_hash:
+					count += 1
+					open_set.put((f_score[neighbor], count, neighbor))
+					open_set_hash.add(neighbor)
+					neighbor.make_open()
+
+		#Update display to Window
+		draw()
+
+		#If current is not Start, make the Node a Closed Node
+		if current != start:
+			current.make_closed()
+
