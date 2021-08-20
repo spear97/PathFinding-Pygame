@@ -4,8 +4,7 @@
     <SchemaVersion>2.0</SchemaVersion>
     <ProjectGuid>9f52bc61-37d5-40ec-a4ea-ac365ad8d8ff</ProjectGuid>
     <ProjectHome>.</ProjectHome>
-    <StartupFile>
-    </StartupFile>
+    <StartupFile>Pathfinding.py</StartupFile>
     <SearchPath>
     </SearchPath>
     <WorkingDirectory>.</WorkingDirectory>
@@ -22,16 +21,7 @@
     <EnableUnmanagedDebugging>false</EnableUnmanagedDebugging>
   </PropertyGroup>
   <ItemGroup>
-    <Compile Include="Color.py">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="Node.py">
-      <SubType>Code</SubType>
-    </Compile>
     <Compile Include="Pathfinding.py">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="Search.py">
       <SubType>Code</SubType>
     </Compile>
   </ItemGroup>
