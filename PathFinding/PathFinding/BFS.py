@@ -3,26 +3,32 @@ from ConstructPath import *
 from queue import PriorityQueue
 
 def BFS(draw, grid, start, end):
+#The Node that the Algorithm is currently on
+	count = 0
 
-	#Queue of Nodes that have not been visited 
-	queue = PriorityQueue()
+	#Initialize the Set of Currently Open Nodes on the Graph
+	open_set = PriorityQueue()
 
-	#Queue of Nodes that have been visitied
-	visited = PriorityQueue()
+	#Push the Start Node to be the the first Open Node for the Algorithm
+	open_set.put((0, count, start))
 
-	#Insert the start Node in queue
-	queue.put(start)
+	#Initialize the set of nodes immediately preceeding the current node
+	came_from = {}
 
-	#Run Algorithm while queue is not Empty
-	while not queue.empty():
+	#Push the value of start into a map so it can latter be put into open_set
+	open_set_hash = {start}
+
+	#Run Algorithm while open_set is not Empy
+	while not open_set.empty():
 
 		#Check to ensure user hasn't closed the Application
 		for event in pygame.event.get():
 			if event.type == pygame.QUIT:
 				pygame.quit()
 
-		#pop queue and store Node in current
-		current = queue.get()
+		#Try to get the greatest value in the queue
+		current = open_set.get()[2]
+		open_set_hash.remove(current)
 
 		#If Current happens to be end Node, reconstruct the path
 		if current == end:
@@ -30,15 +36,18 @@ def BFS(draw, grid, start, end):
 			end.make_end()
 			return True
 
-		#Insert Current to visited
-		visited.put(current)
+		#Find the Closest Neighbor Node to the End Node
+		for neighbor in current.neighbors:
+			if neighbor not in open_set_hash:
+				count += 1
+				open_set.put((0, count, neighbor))
+				open_set_hash.add(neighbor)
+				neighbor.make_open()
 
-		#Get all neighbors to current
-		neighbors = current.update_neighbors(grid)
+		#Update display to Window
+		draw()
 
-		#TODO: Insert neighbors into queue 
-
-		#If current is not start, set is as closed
+		#If current is not Start, make the Node a Closed Node
 		if current != start:
 			current.make_closed()
 
