@@ -75,3 +75,5 @@ def BestFirstSearch(draw, grid, start, end):
 		if current != start:
 			current.make_closed()
 
+	return False
+

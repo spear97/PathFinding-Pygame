@@ -2,6 +2,7 @@ import pygame
 import math
 from Node import *
 from AStar import *
+from BFS import *
 from BestFirstSearch import *
 from queue import PriorityQueue
 
@@ -104,6 +105,14 @@ def main(win, width):
 							node.update_neighbors(grid)
 
 					BestFirstSearch(lambda: draw(win, grid, ROWS, width), grid, start, end)
+
+				if event.key == pygame.K_3 and start and end:
+					for row in grid:
+						for node in row:
+							node.update_neighbors(grid)
+
+					BFS(lambda: draw(win, grid, ROWS, width), grid, start, end)
+
 
 				if event.key == pygame.K_c:
 					start = None
