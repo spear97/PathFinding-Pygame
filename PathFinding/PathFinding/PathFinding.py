@@ -9,7 +9,7 @@ from queue import PriorityQueue
 
 WIDTH = 800
 WIN = pygame.display.set_mode((WIDTH, WIDTH))
-pygame.display.set_caption("A* Path Finding Algorithm")
+pygame.display.set_caption("Path Finding Algorithm (Press 1 for A*, 2 for Best First Search, and 3 for Breadth First Search)")
 
 #Create a Grid for the Algorithm to be able to Use
 def make_grid(rows, width):

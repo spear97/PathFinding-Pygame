@@ -16,6 +16,9 @@ def reconstruct_path(came_from, current, draw):
 
 def BestFirstSearch(draw, grid, start, end):
 
+	#Set Caption to Display which Algorithm is being used
+	pygame.display.set_caption("Greedy Best First Search Path Finding Algorithm (Press 1 for A* and 3 for Breadth First Search)")
+
     #The Node that the Algorithm is currently on
 	count = 0
 

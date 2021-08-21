@@ -9,6 +9,10 @@ def h(p1, p2):
     return math.sqrt((x2-x1)**2 + (y2-y1)**2)
 
 def BFS(draw, grid, start, end):
+
+	#Set Caption to Display which Algorithm is being used
+	pygame.display.set_caption("Breadth First Search Path Finding Algorithm (Press 1 for A* and 2 for Best First Search)")
+
 	#The Node that the Algorithm is currently on
 	count = 0
 

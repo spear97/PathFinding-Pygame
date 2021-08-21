@@ -16,6 +16,9 @@ def reconstruct_path(came_from, current, draw):
 #ASTAR Algorithm
 def AStar(draw, grid, start, end):
 
+	#Set Caption to Display which Algorithm is being used
+	pygame.display.set_caption("A* Path Finding Algorithm (Press 1 for Best First Search and 3 for Breadth First Search)")
+
 	#The Node that the Algorithm is currently on
 	count = 0
 
