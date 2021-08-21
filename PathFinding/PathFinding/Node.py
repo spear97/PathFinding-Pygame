@@ -3,7 +3,7 @@ import pygame
 #Colors that Node Can be
 RED = (255, 0, 0)
 GREEN = (0, 255, 0)
-BLUE = (0, 255, 0)
+BLUE = (0, 0, 255)
 YELLOW = (255, 255, 0)
 WHITE = (255, 255, 255)
 BLACK = (0, 0, 0)
@@ -28,40 +28,40 @@ class Node:
 		return self.row, self.col
 
 	def is_closed(self):
-		return self.color == RED
+		return self.color == BLUE
 
 	def is_open(self):
-		return self.color == GREEN
+		return self.color == TURQUOISE
 
 	def is_barrier(self):
 		return self.color == BLACK
 
 	def is_start(self):
-		return self.color == ORANGE
+		return self.color == GREEN
 
 	def is_end(self):
-		return self.color == TURQUOISE
+		return self.color == RED
 
 	def reset(self):
 		self.color = WHITE
 
 	def make_start(self):
-		self.color = ORANGE
+		self.color = GREEN
 
 	def make_closed(self):
-		self.color = RED
+		self.color = BLUE
 
 	def make_open(self):
-		self.color = GREEN
+		self.color = TURQUOISE
 
 	def make_barrier(self):
 		self.color = BLACK
 
 	def make_end(self):
-		self.color = TURQUOISE
+		self.color = RED
 
 	def make_path(self):
-		self.color = PURPLE
+		self.color = YELLOW
 
 	def draw(self, win):
 		pygame.draw.rect(win, self.color, (self.x, self.y, self.width, self.width))

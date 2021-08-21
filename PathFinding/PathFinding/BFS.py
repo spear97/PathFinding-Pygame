@@ -1,9 +1,15 @@
 import pygame
 from ConstructPath import *
 from queue import PriorityQueue
+import math
+
+def h_BestFirst(p1, p2):
+    x1, y1 = p1
+    x2, y2 = p2
+    return math.sqrt((x2-x1)**2 + (y2-y1)**2)
 
 def BFS(draw, grid, start, end):
-#The Node that the Algorithm is currently on
+   #The Node that the Algorithm is currently on
 	count = 0
 
 	#Initialize the Set of Currently Open Nodes on the Graph
@@ -36,13 +42,14 @@ def BFS(draw, grid, start, end):
 			end.make_end()
 			return True
 
-		#Find the Closest Neighbor Node to the End Node
+		#TODO: Get furtheset Left Node in Neighbors
 		for neighbor in current.neighbors:
+			came_from[neighbor] = current
 			if neighbor not in open_set_hash:
-				count += 1
 				open_set.put((0, count, neighbor))
 				open_set_hash.add(neighbor)
 				neighbor.make_open()
+				
 
 		#Update display to Window
 		draw()
