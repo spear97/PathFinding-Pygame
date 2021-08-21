@@ -2,6 +2,7 @@ import pygame
 from queue import PriorityQueue
 import math
 
+#Heuristic used to locate start from end
 def h(p1, p2):
     x1, y1 = p1
     x2, y2 = p2
@@ -23,8 +24,10 @@ def BFS(draw, grid, start, end):
 	#Push the value of start into a map so it can latter be put into open_set
 	open_set_hash = {start}
 
+	#Determines if a path has been found
 	findEnd = False
 
+	#The current node that is being analyzed
 	current = None
 
 	#Run Algorithm while open_set is not Empy
@@ -47,29 +50,42 @@ def BFS(draw, grid, start, end):
 		#Find the Closest Neighbor Node to the End Node
 		for neighbor in current.neighbors:
 
+			#If neighbor is not in open_set_hash make it open
 			if neighbor not in open_set_hash:
 				count += 1
 				open_set.put((0, count, neighbor))
 				open_set_hash.add(neighbor)
 				neighbor.make_open()
 
+			#If neighbor is in open_set_hash
 			if neighbor in open_set_hash:
+				#If neighbor is neither start nor end, make it closed
 				if current != start and current != end:
 					current.make_closed()
+				#If neighbor is start, but not end, then make it start
 				if current == start and current != end:
 					current.make_start()
+				#If neighbor is not start, but end, then make it end
 				if current != start and current == end:
 					current.make_end()
 				
 		#Update display to Window
 		draw()
 
+	#If end is found
 	if findEnd:
+		#make end end
 		end.make_end()
+		#While current is not back to start yet, backtrace path
 		while current != start:
-			for x in current.neighbors:
-				if h(current.get_pos(), start.get_pos()) > h(x.get_pos(), start.get_pos()):
-					current = x
+			#Calculate which Neighbor is closest to start
+			for neighbor in current.neighbors:
+				#Update Current to neightbor if it has shorter heuristic
+				if h(current.get_pos(), start.get_pos()) > h(neighbor.get_pos(), start.get_pos()):
+					current = neighbor
+			#Make current a path node
+			if current != start:
+				current.make_path()
+			#If current is start, break loop
 			if current == start:
 				break
-			current.make_path()
