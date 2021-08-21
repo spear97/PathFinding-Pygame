@@ -30,9 +30,6 @@
     <Compile Include="BFS.py">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="ConstructPath.py">
-      <SubType>Code</SubType>
-    </Compile>
     <Compile Include="Node.py">
       <SubType>Code</SubType>
     </Compile>

@@ -1,15 +1,14 @@
 import pygame
-from ConstructPath import *
 from queue import PriorityQueue
 import math
 
-def h_BestFirst(p1, p2):
+def h(p1, p2):
     x1, y1 = p1
     x2, y2 = p2
     return math.sqrt((x2-x1)**2 + (y2-y1)**2)
 
 def BFS(draw, grid, start, end):
-   #The Node that the Algorithm is currently on
+	#The Node that the Algorithm is currently on
 	count = 0
 
 	#Initialize the Set of Currently Open Nodes on the Graph
@@ -24,8 +23,12 @@ def BFS(draw, grid, start, end):
 	#Push the value of start into a map so it can latter be put into open_set
 	open_set_hash = {start}
 
+	findEnd = False
+
+	current = None
+
 	#Run Algorithm while open_set is not Empy
-	while not open_set.empty():
+	while not findEnd:
 
 		#Check to ensure user hasn't closed the Application
 		for event in pygame.event.get():
@@ -38,24 +41,35 @@ def BFS(draw, grid, start, end):
 
 		#If Current happens to be end Node, reconstruct the path
 		if current == end:
-			reconstruct_path(came_from, end, draw)
 			end.make_end()
-			return True
+			findEnd = True
 
-		#TODO: Get furtheset Left Node in Neighbors
+		#Find the Closest Neighbor Node to the End Node
 		for neighbor in current.neighbors:
-			came_from[neighbor] = current
+
 			if neighbor not in open_set_hash:
+				count += 1
 				open_set.put((0, count, neighbor))
 				open_set_hash.add(neighbor)
 				neighbor.make_open()
-				
 
+			if neighbor in open_set_hash:
+				if current != start and current != end:
+					current.make_closed()
+				if current == start and current != end:
+					current.make_start()
+				if current != start and current == end:
+					current.make_end()
+				
 		#Update display to Window
 		draw()
 
-		#If current is not Start, make the Node a Closed Node
-		if current != start:
-			current.make_closed()
-
-	return False
+	if findEnd:
+		end.make_end()
+		while current != start:
+			for x in current.neighbors:
+				if h(current.get_pos(), start.get_pos()) > h(x.get_pos(), start.get_pos()):
+					current = x
+			if current == start:
+				break
+			current.make_path()

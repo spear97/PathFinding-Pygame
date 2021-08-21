@@ -1,5 +1,6 @@
 import pygame
 import math
+import sys
 from Node import *
 from AStar import *
 from BFS import *

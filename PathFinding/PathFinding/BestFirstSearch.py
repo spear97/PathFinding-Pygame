@@ -1,5 +1,4 @@
 import pygame
-from ConstructPath import *
 import math
 from queue import PriorityQueue
 
@@ -8,6 +7,12 @@ def h_BestFirst(p1, p2):
     x1, y1 = p1
     x2, y2 = p2
     return math.sqrt((x2-x1)**2 + (y2-y1)**2)
+
+def reconstruct_path(came_from, current, draw):
+	while current in came_from:
+		current = came_from[current]
+		current.make_path()
+		draw()
 
 def BestFirstSearch(draw, grid, start, end):
 
